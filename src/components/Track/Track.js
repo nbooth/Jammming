@@ -8,15 +8,15 @@ class Track extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
   }
-
+  //adds track
   addTrack(){
     this.props.onAdd(this.props.track);
   }
-
+  //removes track
   removeTrack(){
     this.props.onRemove(this.props.track);
   }
-  
+
   render(){
     return(
       <div className="Track">

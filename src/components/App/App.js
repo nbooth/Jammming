@@ -6,18 +6,17 @@ import Playlist from '../Playlist/Playlist';
 import Spotify from '../../util/Spotify';
 
 class App extends Component {
+
   constructor(props){
     super(props);
-    //currently hard-coded for rendering stuff in playlist and track list
     this.state = {
-      //stand-in for search results, will be replaced by api
+      //searchResults array for holding song/artist/album information from search
       searchResults: [
 
       ],
-
-      //stand-in for playlist name, will be replaced
+      //stand-in for playlist name, replaced when playlist input is changed
       playListName: 'New Playlist',
-      //should be kept
+      //keeps track of songs added from SearchResults array, and display information
       playListTracks: [
 
       ],
@@ -32,6 +31,8 @@ class App extends Component {
 
 //adds tracks to playlist if not already inside the playlist
   addTrack(track){
+    //goes through each track in the playlist and checks if song isn't there already, if so, pushes
+    //the track we want to add to the playlistTracks array in state and then sets the state
     if(this.state.playListTracks.every(currentTrack => currentTrack.id !== track.id)){
       let currentPlaylist = this.state.playListTracks.push(track);
       this.setState({ 'playlistTracks': currentPlaylist});
@@ -41,7 +42,11 @@ class App extends Component {
 
 //removes tracks from playlist
   removeTrack(track){
-    let currentPlaylist = this.state.playListTracks.pop();
+    //finds index of the track
+    let index = this.state.playListTracks.findIndex(tracks => tracks.uri === track.uri);
+    //splices the track based on its index
+    let currentPlaylist = this.state.playListTracks.splice(index, 1);
+    //sets the state
     this.setState({'playlistTracks': currentPlaylist});
   }
 
@@ -67,7 +72,7 @@ class App extends Component {
     });
   }
 
-
+//render method
   render() {
     return (
       <div>

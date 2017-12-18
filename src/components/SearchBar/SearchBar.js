@@ -6,16 +6,17 @@ class SearchBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      //empty term for search results to be changed with input
       term: ''
     }
     this.search = this.search.bind(this);
     this.handleTermChange = this.handleTermChange.bind(this);
   }
-
+  //search method
   search(term){
     this.props.onSearch(this.state.term);
   }
-
+  //allows playlist name
   handleTermChange(e){
     const term = e.target.value;
     this.setState({ 'term': term});
