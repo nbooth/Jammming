@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sound from 'react-sound';
 import './Track.css';
 
 class Track extends React.Component {
@@ -22,7 +23,11 @@ class Track extends React.Component {
       <div className="Track">
         <div className="Track-information">
           <h3>{this.props.track.name}</h3>
-          <p>{this.props.track.artist + ' | ' + this.props.track.album}</p>
+          <p>{this.props.track.artist + ' | \n' + this.props.track.album}</p>
+          {!this.props.component && <p>Preview:</p>}
+          { this.props.track.preview && !this.props.component && <audio controls controlsList="nodownload"> && <source src={this.props.track.preview} type="audio/wav" />
+           && </audio>}
+          {!this.props.track.preview && !this.props.component && <p>No preview available.</p>}
         </div>
         {!this.props.component && <a className="Track-action" onClick={this.addTrack}> + </a>}
         {this.props.component && <a className="Track-action" onClick={this.removeTrack}> - </a>}

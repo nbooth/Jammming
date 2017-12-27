@@ -28,14 +28,15 @@ class App extends Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
-
 //adds tracks to playlist if not already inside the playlist
   addTrack(track){
     //goes through each track in the playlist and checks if song isn't there already, if so, pushes
     //the track we want to add to the playlistTracks array in state and then sets the state
     if(this.state.playListTracks.every(currentTrack => currentTrack.id !== track.id)){
       let currentPlaylist = this.state.playListTracks.push(track);
-      this.setState({ 'playlistTracks': currentPlaylist});
+      this.setState({'playlistTracks': currentPlaylist});
+      let index = this.state.searchResults.findIndex(tracks => tracks.uri === track.uri);
+      let currentSearchResults = this.state.searchResults.splice(index, 1);
     }
 
   }
@@ -65,6 +66,7 @@ class App extends Component {
   }
 
 //takes information from spotify based on term, sets results to searchresults in state
+//NEEDS ENTER
   search(term){
     console.log('Searching for ' + term);
     return Spotify.search(term).then(tracks => {

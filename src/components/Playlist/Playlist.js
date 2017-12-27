@@ -6,10 +6,10 @@ class Playlist extends React.Component {
 
   constructor(props) {
     super(props);
+    this.hasTracks = false;
     this.handleNameChange = this.handleNameChange.bind(this);
   }
 
-  //changes the name from the input value of the playlist
   handleNameChange(event) {
     this.props.onNameChange(event.target.value);
   }
